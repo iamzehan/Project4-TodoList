@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bgc: black;
+  --font-color: canvas;
+  --icofont: "Material Symbols Outlined";
+  --default-font: "system-ui";
+}
+
+body {
+  background-color: var(--bgc);
+  color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: var(--default-font);
+}
+
+/* All icons setting */
+.icon {
+  font-family: var(--icofont);
+}
+

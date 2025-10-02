@@ -39,9 +39,9 @@ nav {
   gap: 1.5em;
 }
 
-.navigaton,
-.projects,
-.footer {
+nav .navigaton,
+nav .projects,
+nav .footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -95,27 +95,28 @@ nav {
     background-color: transparent;
   }
 
-  button > :first-child {
+  button > .icon {
     font-size: 1.5rem;
     font-weight: 100;
     font-family: var(--icofont);
     color: grey;
   }
-  button > :last-child {
+  button > text {
     color: rgba(0, 0, 0, 0.5);
   }
-  button.active > :first-child{
+
+  button.active > .icon{
     font-size: 1.5rem;
     font-weight: 100;
     font-family: var(--iconfont-filled);
     color: grey;
   }
-  button.active > :first-child,
-  button.active > :last-child {
+  button.active > .icon,
+  button.active > text {
     color: var(--accent-color);
   }
 
-  button.active > :last-child {
+  button.active > text {
     font-weight: bold;
   }
 }
@@ -128,18 +129,24 @@ nav > .profile {
   justify-content: center;
   align-items: center;
 
-  > :first-child {
+  > [alt='dp']{
     height: 30px;
     aspect-ratio: 1/1;
     border-radius: 50%;
   }
-  > :nth-child(2) {
+  > .username {
     font-weight: bold;
   }
-  > :last-child {
+  > .icon {
+    font-size: 1.2rem;
+    font-family: var(--icofont);
     margin-right: 1em;
     text-align: right;
     color: grey;
+  }
+  > .icon.active{
+    font-family: var(--iconfont-filled);
+    color: var(--accent-color);
   }
 }
 
@@ -156,3 +163,4 @@ nav > .footer {
   flex-direction: column;
   justify-content: flex-end;
 }
+

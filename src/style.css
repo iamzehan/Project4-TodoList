@@ -13,7 +13,7 @@
   --default-font: "system-ui";
   color-scheme: dark;
   --accent-color: orangered;
-  --accent-color-background: rgba(255, 68, 0, 0.2);
+  --accent-color-background: rgba(255, 68, 0, 0.1);
   --active-color-background: rgba(0, 0, 0, 0.05);
 }
 
@@ -80,11 +80,17 @@ nav {
     }
   }
 
-  div:hover,
-  :has(> button.active) {
+  div:hover{
     background-color: var(--active-color-background);
+  }
+  div:has(>button.active){
+    background-color: var(--accent-color-background);
+  }
+  div:hover , :has(> button.active) {
     transform: translateX(0.5em);
-    transition: 0.3s transform ease-in-out;
+    margin-right: 0.5em;
+    transition: 0.3s transform ease-in-out,
+    0.3s margin-right ease-in-out;
     &::before {
       transform: scaleX(1);
     }

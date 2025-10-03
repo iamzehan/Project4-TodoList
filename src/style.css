@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons+Round:opsz,wght,FILL,GRAD@24,300,0,0");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -23,7 +24,6 @@ body {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 250px 1fr;
-  grid-template-rows: 1fr;
   gap: 2em;
   height: 100vh;
   width: 100vw;
@@ -54,6 +54,8 @@ button.common {
 }
 
 nav {
+  position: sticky;
+  overflow: hidden;
   height: 100%;
   color: canvas;
   background-color: var(--nav-bg);
@@ -216,6 +218,8 @@ nav > .footer {
 
 div.content {
   width: 100%;
+  overflow-y: auto ;
+  transition: 0.3s width ease;
 }
 
 nav.hide {
@@ -232,7 +236,10 @@ nav, div.content{
   animation: 0.4s slideRight ease-in forwards;
 }
 div.content.expand{
+  width: calc(100%+195px);
+  overflow: hidden;
   animation: 0.4s slideLeft ease-out forwards;
+  transition: 0.1s width ease;
 }
 
 @keyframes slideLeft {

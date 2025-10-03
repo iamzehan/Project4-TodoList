@@ -28,7 +28,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: var(--default-font);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 button.common {
@@ -57,7 +57,6 @@ button.common {
 nav {
   top: 0;
   position: sticky;
-  overflow: hidden;
   height: 100vh;
   color: canvas;
   background-color: var(--nav-bg);
@@ -220,8 +219,8 @@ nav > .footer {
 
 div.content {
   width: 100%;
-  transition: 0.3s width ease;
   overflow-y: hidden;
+  transition: 0.3s width ease;
 }
 
 nav.hide {

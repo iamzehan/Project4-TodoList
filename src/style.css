@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons+Round");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +10,7 @@
   --bgc: black;
   --font-color: canvas;
   --icofont: "Material Symbols Outlined";
-  --iconfont-filled: "Material Icons";
+  --iconfont-filled: "Material Icons Round";
   --default-font: "system-ui";
   color-scheme: dark;
   --accent-color: orangered;

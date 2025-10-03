@@ -54,14 +54,14 @@ nav .footer {
   padding-left: 0.5em;
   gap: 0.1em;
   div {
-    padding: 0.5em;
+    position: relative;
     border-top-left-radius: 0.25em;
     border-bottom-left-radius: 0.25em;
-    position: relative;
     & > * {
       display: flex;
       align-items: center;
       gap: 0.5em;
+      height: 40px;
       width: 100%;
     }
     &::before {
@@ -97,7 +97,9 @@ nav .footer {
   }
   button {
     border: none;
+    padding: 0.5em;
     background-color: transparent;
+    transition: 0.3s font-weight ease, 0.3s color ease;
   }
 
   button > .icon {

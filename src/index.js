@@ -24,6 +24,11 @@ const navButtons = document.querySelectorAll("button:not(button.notifications)")
 let lastTarget = document.querySelector("button.active:not(button.notifications)");
 const pageContent = document.querySelector(".content");
 
+document.addEventListener("DOMContentLoaded", ()=> {
+  setActiveState(lastTarget, lastTarget);
+  loadPage(lastTarget, pageContent);
+})
+
 navButtons.forEach((button) => {
   button.addEventListener("click", () => {
     lastTarget = setActiveState(lastTarget, button);

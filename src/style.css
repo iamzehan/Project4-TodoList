@@ -16,13 +16,14 @@
   --accent-color: orangered;
   --accent-color-background: rgba(255, 68, 0, 0.1);
   --active-color-background: rgba(0, 0, 0, 0.05);
+  --nav-bg: rgb(243, 227, 221);
 }
 
 body {
   border: 1px solid;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 250px 1fr;
   grid-template-rows: 1fr;
   height: 100vh;
   width: 100vw;
@@ -32,7 +33,7 @@ body {
 nav {
   height: 100%;
   color: canvas;
-  background-color: whitesmoke;
+  background-color: var(--nav-bg);
   display: grid;
   grid-auto-flow: row;
   grid-template-rows: min-content min-content min-content 1fr;
@@ -51,12 +52,11 @@ nav .footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 0.5em;
+  padding: 0 0.5em;
   gap: 0.1em;
   div {
     position: relative;
-    border-top-left-radius: 0.25em;
-    border-bottom-left-radius: 0.25em;
+    border-radius: 0.5em;
     & > * {
       display: flex;
       align-items: center;
@@ -129,7 +129,7 @@ nav .footer {
 nav > .profile {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr 2fr max-content;
   padding: 0.5em 0.5em;
   justify-content: center;
   align-items: center;
@@ -142,7 +142,7 @@ nav > .profile {
   > .username {
     font-weight: bold;
   }
-  > .icon {
+  > .notifications.icon {
     cursor: default;
     font-family: var(--iconfont-filled);
     width: fit-content;
@@ -155,10 +155,19 @@ nav > .profile {
     border-radius: 0.2rem;
     transition: 0.2s color ease-in-out, 0.3s background-color ease-in-out;
   }
-  > .icon.active {
+  > .notifications.icon.active {
     font-family: var(--iconfont-filled);
     color: var(--accent-color);
     background-color: var(--accent-color-background);
+  }
+
+  > .dock-left.icon {
+    font-family: var(--icofont);
+    padding: 0.3em;
+    border-radius: 0.2rem;
+  }
+  > .dock-left.icon:active{
+    background-color: var(--active-color-background);
   }
 }
 

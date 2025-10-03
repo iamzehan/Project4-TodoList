@@ -1,6 +1,9 @@
 import './style.css';
+import template from './template.html';
+import Data from "./Data.json";
 
-const hello = document.createElement("h1");
-hello.textContent = "Inbox";
+const inbox =  document.createElement("div");
+inbox.classList.add("page");
+inbox.innerHTML = template;
 
-export default hello;
+export default inbox;

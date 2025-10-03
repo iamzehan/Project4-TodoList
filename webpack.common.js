@@ -10,6 +10,7 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    assetModuleFilename: "static/[name][ext][query]",
   },
   devtool: "eval-source-map",
   devServer: {

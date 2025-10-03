@@ -22,7 +22,7 @@ body {
   border: 1px solid;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 200px max-content;
+  grid-template-columns: 200px 1fr;
   grid-template-rows: 1fr;
   height: 100vh;
   width: 100vw;
@@ -37,11 +37,17 @@ nav {
   grid-auto-flow: row;
   grid-template-rows: max-content max-content max-content 1fr;
   gap: 1.5em;
+
+  /* disable select text */
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For IE 10 and 11 */
 }
 
-.navigaton,
-.projects,
-.footer {
+nav .navigation,
+nav .projects,
+nav .footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,7 +55,6 @@ nav {
   gap: 0.1em;
 
   div {
-    height: 3rem;
     padding: 0.5em;
     border-top-left-radius: 0.25em;
     border-bottom-left-radius: 0.25em;
@@ -76,17 +81,17 @@ nav {
     }
   }
 
-  div:hover{
+  div:hover {
     background-color: var(--active-color-background);
   }
-  div:has(>button.active){
+  div:has(> button.active) {
     background-color: var(--accent-color-background);
   }
-  div:hover , :has(> button.active) {
+  div:hover,
+  :has(> button.active) {
     transform: translateX(0.5em);
     margin-right: 0.5em;
-    transition: 0.3s transform ease-in-out,
-    0.3s margin-right ease-in-out;
+    transition: 0.3s transform ease-in-out, 0.3s margin-right ease-in-out;
     &::before {
       transform: scaleX(1);
     }
@@ -96,27 +101,28 @@ nav {
     background-color: transparent;
   }
 
-  button > :first-child {
+  button > .icon {
     font-size: 1.5rem;
     font-weight: 100;
     font-family: var(--icofont);
     color: grey;
   }
-  button > :last-child {
+  button > text {
     color: rgba(0, 0, 0, 0.5);
   }
-  button.active > :first-child{
+
+  button.active > .icon {
     font-size: 1.5rem;
     font-weight: 100;
     font-family: var(--iconfont-filled);
     color: grey;
   }
-  button.active > :first-child,
-  button.active > :last-child {
+  button.active > .icon,
+  button.active > text {
     color: var(--accent-color);
   }
 
-  button.active > :last-child {
+  button.active > text {
     font-weight: bold;
   }
 }
@@ -129,23 +135,36 @@ nav > .profile {
   justify-content: center;
   align-items: center;
 
-  > :first-child {
+  > [alt="dp"] {
     height: 30px;
     aspect-ratio: 1/1;
     border-radius: 50%;
   }
-  > :nth-child(2) {
+  > .username {
     font-weight: bold;
   }
-  > :last-child {
+  > .icon {
+    cursor: default;
+    font-family: var(--iconfont-filled);
+    width: fit-content;
+    justify-self: flex-end;
+    font-size: 1.2rem;
     margin-right: 1em;
-    text-align: right;
     color: grey;
+    text-align: right;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    transition: 0.2s color ease-in-out, 0.3s background-color ease-in-out;
+  }
+  > .icon.active {
+    font-family: var(--iconfont-filled);
+    color: var(--accent-color);
+    background-color: var(--accent-color-background);
   }
 }
 
 nav > .projects {
-   & > .title{
+  & > .title {
     font-size: 1rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.63);

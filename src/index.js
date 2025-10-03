@@ -14,15 +14,22 @@ function setActiveState(lastTarget, button){
 
 function loadPage(target, pageContent){
   pageContent.innerHTML = "";
-  if(target.lastElementChild.textContent 
+  let pageName = target.lastElementChild.textContent;
+  if(pageName
     == 'Inbox' && target.classList.contains("active")
   ){
     pageContent.appendChild(Inbox);
   }
+  if (pageName.includes("notifications")){
+    if (target.classList.contains("active")){
+      target.lastElementChild.textContent = "notifications";
+    }
+    pageContent.innerHTML = "<h1>Notifications</h1>"
+  }
 }
 
-const navButtons = document.querySelectorAll("button:not(button.notifications)");
-let lastTarget = document.querySelector("button.active:not(button.notifications)");
+const navButtons = document.querySelectorAll("button");
+let lastTarget = document.querySelector("button.active");
 const pageContent = document.querySelector(".content");
 
 document.addEventListener("DOMContentLoaded", ()=> {
@@ -34,32 +41,7 @@ navButtons.forEach((button) => {
   button.addEventListener("click", () => {
     lastTarget = setActiveState(lastTarget, button);
     loadPage(lastTarget, pageContent);
-    if (notifications.classList.contains("active")){
-        notifications.classList.toggle("active");
-      }
   });
-});
-
-function notificationsPageLoad(target, pageContent, lastTarget){
-  pageContent.innerHTML = "";
-  if (target.textContent == "notifications"){
-    lastTarget.classList.remove("active");
-    pageContent.innerHTML = "<h1>Notifications</h1>"
-  }
-}
-
-const notifications = document.querySelector(".notifications");
-notifications.addEventListener("click", ()=> {
-  notifications.classList.toggle("active");
-  if (notifications.classList.contains("active")){
-    notifications.textContent = "notifications";
-    notificationsPageLoad(notifications, pageContent, lastTarget);
-  }
-  else{
-    lastTarget.classList.add("active");
-    loadPage(lastTarget, pageContent);
-    notifications.textContent = "notifications_none";
-  }
 });
 
 const dockButton = document.querySelector("span.dock");

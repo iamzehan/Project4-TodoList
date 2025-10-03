@@ -48,7 +48,8 @@ nav {
 
 nav .navigation,
 nav .projects,
-nav .footer {
+nav .footer,
+nav .profile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -134,7 +135,7 @@ nav > .profile {
   padding: 0.5em 0.5em;
   justify-content: center;
   align-items: center;
-
+  height: 60px;
   > [alt="dp"] {
     height: 30px;
     aspect-ratio: 1/1;
@@ -158,10 +159,12 @@ nav > .profile {
     text-align: right;
     transition: 0.2s color ease-in-out, 0.3s background-color ease-in-out;
   }
-  > .notifications.icon.active {
+  > button.active > .icon {
     font-family: var(--iconfont-filled);
     color: var(--accent-color);
     background-color: var(--accent-color-background);
+    padding: 0.2em;
+    border-radius: 0.2rem;
   }
 
   > .dock.icon {

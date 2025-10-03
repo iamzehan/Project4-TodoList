@@ -36,12 +36,20 @@ button.common {
     padding: 0.5em;
     border: none;
     border-radius: 0.2em;
+    transition: 0.3s background-color ease;
     > * {
       vertical-align: middle;
     }
     > .icon {
-      font-family: "Material Icons Round";
+      font-family: var(--iconfont-filled);
       font-size: 1.2rem;
+    }
+    &:hover{
+      background-color: #fff;
+      color: var(--accent-color);
+    }
+    &:active{
+      background-color: var(--nav-bg);
     }
 }
 

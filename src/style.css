@@ -37,11 +37,17 @@ nav {
   grid-auto-flow: row;
   grid-template-rows: max-content max-content max-content 1fr;
   gap: 1.5em;
+
+  /* disable select text */
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For IE 10 and 11 */
 }
 
 nav .navigation,
 nav .projects,
-nav .footer{
+nav .footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,17 +81,17 @@ nav .footer{
     }
   }
 
-  div:hover{
+  div:hover {
     background-color: var(--active-color-background);
   }
-  div:has(>button.active){
+  div:has(> button.active) {
     background-color: var(--accent-color-background);
   }
-  div:hover , :has(> button.active) {
+  div:hover,
+  :has(> button.active) {
     transform: translateX(0.5em);
     margin-right: 0.5em;
-    transition: 0.3s transform ease-in-out,
-    0.3s margin-right ease-in-out;
+    transition: 0.3s transform ease-in-out, 0.3s margin-right ease-in-out;
     &::before {
       transform: scaleX(1);
     }
@@ -105,7 +111,7 @@ nav .footer{
     color: rgba(0, 0, 0, 0.5);
   }
 
-  button.active > .icon{
+  button.active > .icon {
     font-size: 1.5rem;
     font-weight: 100;
     font-family: var(--iconfont-filled);
@@ -129,7 +135,7 @@ nav > .profile {
   justify-content: center;
   align-items: center;
 
-  > [alt='dp']{
+  > [alt="dp"] {
     height: 30px;
     aspect-ratio: 1/1;
     border-radius: 50%;
@@ -140,20 +146,25 @@ nav > .profile {
   > .icon {
     cursor: default;
     font-family: var(--iconfont-filled);
-    
+    width: fit-content;
+    justify-self: flex-end;
     font-size: 1.2rem;
     margin-right: 1em;
     color: grey;
     text-align: right;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    transition: 0.2s color ease-in-out, 0.3s background-color ease-in-out;
   }
-  > .icon.active{
+  > .icon.active {
     font-family: var(--iconfont-filled);
     color: var(--accent-color);
+    background-color: var(--accent-color-background);
   }
 }
 
 nav > .projects {
-   & > .title{
+  & > .title {
     font-size: 1rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.63);

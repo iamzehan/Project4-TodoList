@@ -1,0 +1,25 @@
+@import url("../../style.css");
+
+.page {
+  padding: 1em 0em;
+  height: 100%;
+  animation: 0.1s fadeIn ease-in forwards;
+}
+
+.inbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  text-align: center;
+  height: inherit;
+
+  > * {
+    width: 300px;
+    font-size: 1rem;
+  }
+  > img {
+    width: 150px;
+  }
+}

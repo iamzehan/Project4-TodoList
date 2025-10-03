@@ -30,6 +30,29 @@ body {
   font-family: var(--default-font);
 }
 
+button.common {
+    width: max-content;
+    background-color: var(--accent-color);
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.2em;
+    transition: 0.3s background-color ease;
+    > * {
+      vertical-align: middle;
+    }
+    > .icon {
+      font-family: var(--iconfont-filled);
+      font-size: 1.2rem;
+    }
+    &:hover{
+      background-color: #fff;
+      color: var(--accent-color);
+    }
+    &:active{
+      background-color: var(--nav-bg);
+    }
+}
+
 nav {
   height: 100%;
   color: canvas;
@@ -197,7 +220,7 @@ div.content {
 
 nav.hide {
   animation: 0.4s slideLeft ease-out forwards;
-  .navigation, .footer{
+  > .navigation, .projects, .footer{
     margin-right: 40px;
     transition: 0.2s margin-right ease-out;
   }
@@ -220,6 +243,15 @@ div.content.expand{
   from {transform: translateX(-210px);}
   to {transform: translateX(0);}
 }
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  25% {opacity: 0.25;}
+  50% {opacity: 0.50;}
+  75% {opacity: 0.75;}
+  100% {opacity: 1;}
+}
+
 @keyframes fadeOut {
   0% {opacity: 1;}
   25% {opacity: 0.75;}

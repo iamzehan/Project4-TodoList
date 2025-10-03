@@ -1,12 +1,13 @@
 import "./style.css";
 import Inbox from './components/Inbox/index.js';
+
 function setActiveState(lastTarget, button){
    if (
       button.lastElementChild.textContent !=
       lastTarget.lastElementChild.textContent
     ) {
       button.classList.add("active");
-      lastTarget.classList.remove("active")
+      lastTarget.classList.remove("active");
     }
     return button;
 }
@@ -33,16 +34,30 @@ navButtons.forEach((button) => {
   button.addEventListener("click", () => {
     lastTarget = setActiveState(lastTarget, button);
     loadPage(lastTarget, pageContent);
+    if (notifications.classList.contains("active")){
+        notifications.classList.toggle("active");
+      }
   });
 });
+
+function notificationsPageLoad(target, pageContent, lastTarget){
+  pageContent.innerHTML = "";
+  if (target.textContent == "notifications"){
+    lastTarget.classList.remove("active");
+    pageContent.innerHTML = "<h1>Notifications</h1>"
+  }
+}
 
 const notifications = document.querySelector(".notifications");
 notifications.addEventListener("click", ()=> {
   notifications.classList.toggle("active");
   if (notifications.classList.contains("active")){
     notifications.textContent = "notifications";
+    notificationsPageLoad(notifications, pageContent, lastTarget);
   }
   else{
+    lastTarget.classList.add("active");
+    loadPage(lastTarget, pageContent);
     notifications.textContent = "notifications_none";
   }
 });

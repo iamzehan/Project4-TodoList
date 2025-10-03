@@ -45,4 +45,18 @@ notifications.addEventListener("click", ()=> {
   else{
     notifications.textContent = "notifications_none";
   }
+});
+
+const dockButton = document.querySelector("span.dock");
+const navBar = document.querySelector("nav");
+dockButton.addEventListener("click", () => {
+  navBar.classList.toggle("hide");
+  
+  if(navBar.classList.contains("hide")){
+    dockButton.textContent = "dock_to_right";
+  }
+  else {
+    dockButton.textContent = "dock_to_left";
+  }
+  pageContent.classList.toggle("expand");
 })

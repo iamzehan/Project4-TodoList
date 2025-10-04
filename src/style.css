@@ -55,8 +55,9 @@ button.common {
 }
 
 nav {
-  position: sticky;
   top: 0;
+  position: sticky;
+  overflow: hidden;
   height: 100vh;
   color: canvas;
   background-color: var(--nav-bg);
@@ -234,6 +235,7 @@ nav.hide {
 }
 
 nav, div.content{
+  transition: 0.5s width ease-in-out;
   animation: 0.4s slideRight ease-in forwards;
 }
 div.content.expand{

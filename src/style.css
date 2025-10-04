@@ -28,6 +28,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: var(--default-font);
+  overflow-x: hidden;
 }
 
 button.common {
@@ -55,8 +56,8 @@ button.common {
 
 nav {
   position: sticky;
-  overflow: hidden;
-  height: 100%;
+  top: 0;
+  height: 100vh;
   color: canvas;
   background-color: var(--nav-bg);
   display: grid;
@@ -218,8 +219,8 @@ nav > .footer {
 
 div.content {
   width: 100%;
-  overflow-y: auto ;
   transition: 0.3s width ease;
+  overflow-y: hidden;
 }
 
 nav.hide {
@@ -237,7 +238,6 @@ nav, div.content{
 }
 div.content.expand{
   width: calc(100%+195px);
-  overflow: hidden;
   animation: 0.4s slideLeft ease-out forwards;
   transition: 0.1s width ease;
 }

@@ -28,7 +28,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: var(--default-font);
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 button.common {
@@ -218,6 +218,7 @@ nav > .footer {
 }
 
 div.content {
+  height: 200vh;
   width: 100%;
   overflow-y: hidden;
   transition: 0.3s width ease;

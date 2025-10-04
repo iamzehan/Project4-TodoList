@@ -220,8 +220,8 @@ nav > .footer {
 
 div.content {
   width: 100%;
-  overflow-y: hidden ;
   transition: 0.3s width ease;
+  overflow-y: hidden;
 }
 
 nav.hide {

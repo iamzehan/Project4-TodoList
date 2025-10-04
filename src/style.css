@@ -32,6 +32,7 @@ body {
 }
 
 button.common {
+    height: max-content;
     width: max-content;
     background-color: var(--accent-color);
     padding: 0.5em;

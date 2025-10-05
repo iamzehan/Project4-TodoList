@@ -1,5 +1,5 @@
 import Button from "./createButton";
-import { AddTask, UpdateTask } from "./Dialog";
+import { AddTask, UpdateTask, DialogReadOnly } from "./Dialog";
 
 // List item constructor
 function List(task) {
@@ -37,13 +37,11 @@ function List(task) {
   this.taskItem.appendChild(deleteBtn);
 
   // Create read button
-  const readBtn = new Button(
+  this.readBtn = new Button(
     ["icon-btn", "view"],
     "description"
   ).getButtonWithoutText();
-  
-  readBtn.addEventListener("click", () => alert("Read clicked"));
-  this.taskItem.appendChild(readBtn);
+  this.taskItem.appendChild(this.readBtn);
 
   // event listener for the item
   inputCheck.addEventListener("click", () => {
@@ -63,10 +61,18 @@ function Wrapper(inbox, data) {
   //going through the data and keeping tabs on update functionality
   data.tasks.forEach((task) => {
     const list = new List(task);
+
+    // edit button event
     list.editBtn.addEventListener("click", () => {
       const updater = new UpdateTask(inbox, task);
       updater.open();
     });
+
+    // read button event
+    list.readBtn.addEventListener("click", ()=> {
+      const viewer = new DialogReadOnly(inbox, task, task.title);
+      viewer.open();
+    })
     inboxListBody.appendChild(list.taskItem);
   });
 

@@ -20,21 +20,15 @@ class Dialog {
     this.textarea.id = "description";
     this.textarea.placeholder = "Write here...";
 
-    // Build structure
-    this.fieldset.appendChild(this.legend);
-    this.fieldset.appendChild(this.input);
-    this.fieldset.appendChild(this.textarea);
-    this.dialog.appendChild(this.fieldset);
-
     // Create buttons container
     this.buttonContainer = document.createElement("div");
     this.buttonContainer.classList.add("btn-container");
-    const cancel = new Button(["common", "mono", "cancel"], "cancel", "Cancel").getButtonWithText();
-
-    this.buttonContainer.appendChild(cancel);
-    this.dialog.appendChild(this.buttonContainer);
-
-    cancel.addEventListener("click", () => this.dialog.close());
+    this.cancel = new Button(
+      ["common", "mono", "cancel"],
+      "cancel",
+      "Cancel"
+    ).getButtonWithText();
+    this.cancel.addEventListener("click", () => this.dialog.close());
   }
 
   open() {
@@ -46,25 +40,58 @@ class Dialog {
   }
 }
 
-class AddTask extends Dialog {
-  constructor(inbox, legend="Add New Task"){
+// Dialog Read View
+class DialogReadOnly extends Dialog {
+  constructor(data){
+    this.data = data;
+    super(this.data.title); // the legend should contain the title of the task;
+    this.fieldset.appendChild(this.legend);
+    this.description = document.createElement("p");
+    this.fieldset.appendChild(this.description);
+  }
+}
+
+// Dialog Write View
+class DialogWrite extends Dialog {
+  constructor(legend) {
     super(legend);
-    const save = new Button(["common", "save"], "save", "Save").getButtonWithText();
+    // Build structure
+    this.fieldset.appendChild(this.legend);
+    this.fieldset.appendChild(this.input);
+    this.fieldset.appendChild(this.textarea);
+    this.dialog.appendChild(this.fieldset);
+    this.buttonContainer.appendChild(this.cancel);
+    this.dialog.appendChild(this.buttonContainer);
+  }
+}
+
+class AddTask extends DialogWrite {
+  constructor(inbox, legend = "Add New Task") {
+    super(legend);
+    const save = new Button(
+      ["common", "save"],
+      "save",
+      "Save"
+    ).getButtonWithText();
     this.buttonContainer.appendChild(save);
     inbox.appendChild(this.dialog);
   }
 }
 
-class UpdateTask extends Dialog {
-  constructor(inbox, data, legend="Update Task"){
+class UpdateTask extends DialogWrite {
+  constructor(inbox, data, legend = "Update Task") {
     super(legend);
     this.data = data;
     this.input.value = this.data.title;
     this.textarea.textContent = this.data.description;
-    const update = new Button(["common", "update"], "update", "Update").getButtonWithText();
+    const update = new Button(
+      ["common", "update"],
+      "update",
+      "Update"
+    ).getButtonWithText();
     this.buttonContainer.appendChild(update);
     inbox.appendChild(this.dialog);
   }
 }
 
-export {AddTask, UpdateTask};
+export { AddTask, UpdateTask };

@@ -3,7 +3,7 @@ import template from "./empty.html";
 import data from "./Data.json";
 import Button from "./sub-components/createButton.js";
 //components
-import { Dialog } from "./sub-components/Dialog.js";
+import { AddTask } from "./sub-components/Dialog.js";
 import Wrapper from "./sub-components/createListCards.js";
 
 //wrapper
@@ -11,7 +11,7 @@ const inbox = document.createElement("div");
 inbox.classList.add("inbox");
 
 // append the dialog to the wrapper
-const dialog = new Dialog();
+const dialog = new AddTask();
 inbox.appendChild(dialog.getDialog());
 
 //page title

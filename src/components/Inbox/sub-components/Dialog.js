@@ -37,10 +37,6 @@ class Dialog {
     cancel.addEventListener("click", () => this.dialog.close());
   }
 
-  getDialog(){
-    return this.dialog;
-  }
-
   open() {
     return this.dialog.showModal();
   }
@@ -55,7 +51,7 @@ class AddTask extends Dialog {
     super(legend);
     const save = new Button(["common", "save"], "save", "Save").getButtonWithText();
     this.buttonContainer.appendChild(save);
-    inbox.appendChild(this.getDialog());
+    inbox.appendChild(this.dialog);
   }
 }
 
@@ -67,7 +63,7 @@ class UpdateTask extends Dialog {
     this.textarea.textContent = this.data.description;
     const update = new Button(["common", "update"], "update", "Update").getButtonWithText();
     this.buttonContainer.appendChild(update);
-    inbox.appendChild(this.getDialog());
+    inbox.appendChild(this.dialog);
   }
 }
 

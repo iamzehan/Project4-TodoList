@@ -114,11 +114,13 @@ h3:hover {
   gap: 1em;
   padding: 1em 0;
   border-bottom: 1px solid grey;
+  transition: grid-template-columns 1s ease-in-out,
+  gap 0.3s ease-in-out;
 }
 
 .inbox-list-body > li {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: max-content 1fr;
   grid-template-rows: 1fr;
   grid-auto-columns: max-content;
   list-style: none;
@@ -128,8 +130,13 @@ h3:hover {
   border: 1px solid grey;
   cursor: default;
   background-color: transparent;
-  transition: 0.5s border-color ease-in-out, 0.1s box-shadow ease-in-out,
-    0.1s background-color ease-in-out, 0.2s color ease-in-out;
+  transition: 0.5s border-color ease-in-out, 
+  0.1s box-shadow ease-in-out,
+  0.1s background-color ease-in-out, 
+  0.2s color ease-in-out,
+  grid-template-columns 0.5s ease-in-out,
+  gap 0.3s ease;
+
   & > * {
     align-self: center;
   }

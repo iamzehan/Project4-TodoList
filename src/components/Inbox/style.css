@@ -15,29 +15,6 @@ h3:hover {
   user-select: text;
 }
 
-.common.special {
-  background-color: transparent;
-  color: white;
-  transition: 0.3s color ease-in-out, 0.3s font-weight ease-in-out;
-  & > .icon {
-    font-family: var(--iconfont-filled);
-    margin-right: 0.5em;
-    color: var(--accent-color);
-    font-size: 1.5rem;
-    font-weight: bold;
-    transition: 0.3s color ease-in-out;
-  }
-  
-  &:hover {
-    color: var(--accent-color);
-    background-color: transparent;
-    font-weight: bold;
-    > .icon {
-      color: white;
-    }
-  }
-}
-
 .icon-btn {
   font-family: var(--icofont);
   font-size: inherit;
@@ -98,11 +75,38 @@ h3:hover {
     content: "Delete";
   }
 }
+
 .inbox-list-body-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
   gap: 1em;
+}
+
+.inbox-list-body-wrapper > .common.special {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+  background-color: canvas;
+  border-radius: 0.5em;
+  border: 1px solid var(--accent-color);
+  color: white;
+  font-size: 1rem;
+  width: 8rem;
+  transition: 0.3s color ease-in-out, 0.3s font-weight ease-in-out;
+  & > .icon {
+    font-family: var(--iconfont-filled);
+    margin-right: 0.5em;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: 0.3s color ease-in-out;
+  }
+
+  &:hover {
+    color: var(--accent-color);
+    border: 1px solid white;
+  }
 }
 
 .inbox-list-body {
@@ -219,14 +223,18 @@ dialog[open] > fieldset {
 dialog[open] > .btn-container {
   display: flex;
   height: max-content;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
   align-items: center;
+  
   gap: 0.5em;
+
   > button {
+    border: 1px solid;
     border-radius: 0.5em;
-    > span {
-      display: none;
-    }
+  }
+  > button > .icon {
+    display: none;
   }
   > button.save {
     border: 1px solid var(--accent-color);
@@ -234,6 +242,11 @@ dialog[open] > .btn-container {
   > button.cancel {
     flex-direction: row-reverse;
   }
+  > button.update:hover{
+    border: 1px solid green;
+    color: green;
+  }
+  
 }
 
 dialog[open] > fieldset {

@@ -51,18 +51,23 @@ class Dialog {
 }
 
 class AddTask extends Dialog {
-  constructor(legend="Add New Task"){
+  constructor(inbox, legend="Add New Task"){
     super(legend);
     const save = new Button(["common", "save"], "save", "Save").getButtonWithText();
     this.buttonContainer.appendChild(save);
+    inbox.appendChild(this.getDialog());
   }
 }
 
 class UpdateTask extends Dialog {
-  constructor(data, legend="Update Task"){
+  constructor(inbox, data, legend="Update Task"){
     super(legend);
+    this.data = data;
+    this.input.value = this.data.title;
+    this.textarea.textContent = this.data.description;
     const update = new Button(["common", "update"], "update", "Update").getButtonWithText();
     this.buttonContainer.appendChild(update);
+    inbox.appendChild(this.getDialog());
   }
 }
 

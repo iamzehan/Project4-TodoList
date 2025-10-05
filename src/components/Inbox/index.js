@@ -78,10 +78,11 @@ if (noData) {
     buttons.forEach((button) => {
       const btn = new Button(["icon-btn", button], button);
       taskItem.appendChild(btn.getButtonWithoutText());
-    });
-
+    });    
     // event listener for the item
-    taskItem.addEventListener("click", () => {});
+    inputCheck.addEventListener("click", () => {
+        taskItem.classList.toggle("checked");
+    });
   });
   inboxListBodyWrapper.appendChild(inboxListBody);
   const button = new Button(["common", "special"], "add_circle", "Add Task");

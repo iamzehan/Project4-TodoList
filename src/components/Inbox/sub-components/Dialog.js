@@ -5,7 +5,7 @@ import Button from "./createButton";
 class Dialog {
   constructor(legend) {
     this.dialog = document.createElement("dialog");
-    this.fieldset = document.createElement("fieldset"); // ✅ store as a class property
+    this.fieldset = document.createElement("fieldset");
 
     this.legend = document.createElement("legend");
     this.legend.textContent = legend;

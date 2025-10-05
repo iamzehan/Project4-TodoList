@@ -4,13 +4,22 @@
   height: 100%;
   overflow-x: hidden;
   animation: 0.1s fadeIn ease-in-out forwards;
+  -webkit-user-select: text;
+  user-select: none;
+}
+
+h3,
+h3:hover {
+  cursor: text;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .common.special {
   background-color: transparent;
   color: white;
-  
-  .icon {
+  transition: 0.3s color ease-in-out, 0.3s font-weight ease-in-out;
+  & > .icon {
     font-family: var(--iconfont-filled);
     margin-right: 0.5em;
     color: var(--accent-color);
@@ -18,13 +27,12 @@
     font-weight: bold;
     transition: 0.3s color ease-in-out;
   }
-  transition: 0.3s color ease-in-out,
-  0.3s font-weight ease-in-out;
-  &:hover{
+  
+  &:hover {
     color: var(--accent-color);
     background-color: transparent;
     font-weight: bold;
-    > .icon{
+    > .icon {
       color: white;
     }
   }
@@ -39,14 +47,32 @@
   color: grey;
   border: 1px solid grey;
   border-radius: 50%;
-  transition: 0.3s color ease-in-out, 
-  0.5s transform ease-in-out;
+  transition: 0.3s color ease-in-out, 0.5s transform ease-in-out;
+  &::after {
+    position: absolute;
+    font-family: var(--default-font);
+    background-color: black;
+    border: 1px solid;
+    font-size: 0.5rem;
+    width: max-content;
+    padding: 0 0.4em;
+    border-radius: 0.5em;
+    top: 0;
+    transform: translateY(-100%);
+  }
+  &:hover::after {
+    transform: translateY(-120%);
+  }
+}
+
+.inbox-list-body button.icon-btn {
   &:hover {
     border: 1px solid;
     color: white;
   }
 
   &.edit {
+    position-anchor: --edit;
     position: relative;
     grid-column: 3;
     grid-row: 1 / span3;
@@ -59,26 +85,8 @@
     grid-row: 1 / span3;
   }
 
-  &::after {
-    position: absolute;
-    font-family: var(--default-font);
-    background-color: black;
-    border: 1px solid;
-    font-size: 0.5rem;
-    width: max-content;
-    padding: 0 0.4em;
-    border-radius: 0.5em;
-    z-index: 10;
-    top: 0;
-    transform: translateY(-100%);
-  }
-
-  &:hover::after{
-    transform: translateY(-120%);
-  }
   /* Edit tooltip */
   &.edit:hover::after {
-    position-anchor: --edit;
     position-area: bottom right;
     content: "Edit";
   }
@@ -90,51 +98,66 @@
     content: "Delete";
   }
 }
-
 .inbox-list-body-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
   gap: 1em;
 }
+
 .inbox-list-body {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, max-content)); /* 👈 fixed min width */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(350px, max-content)
+  ); /* 👈 fixed min width */
   gap: 1em;
   padding: 1em 0;
   border-bottom: 1px solid grey;
-  > li {
-    display: grid;
-    grid-template-columns: repeat(4, max-content);
-    grid-template-rows: max-content;
-    list-style: none;
-    padding: 1em;
-    gap: 0 1em;
-    border-radius: 0.5em;
-    border: 1px solid grey;
-    cursor: default;
-    transition: 0.5s border-color ease-in-out,
-    0.1s box-shadow ease-in-out;
-    > * {
-      align-self: center;
-    }
-    > input {
-      grid-column: 1;
-      grid-row: 1 / span3;
-    }
-    > h3 {
-      grid-column: 2;
-    }
-    > p {
-      grid-column: 2;
-      font-size: 0.8rem;
-    }
+}
+
+.inbox-list-body > li {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  grid-template-rows: max-content;
+  list-style: none;
+  padding: 1em;
+  gap: 0 1em;
+  border-radius: 0.5em;
+  border: 1px solid grey;
+  cursor: default;
+  background-color: transparent;
+  transition: 0.5s border-color ease-in-out, 0.1s box-shadow ease-in-out,
+    0.1s background-color ease-in-out, 0.2s color ease-in-out;
+  & > * {
+    align-self: center;
   }
-  > li:hover {
+  & > input {
+    grid-column: 1;
+    grid-row: 1 / span3;
+  }
+  & > h3 {
+    grid-column: 2;
+  }
+  & > p {
+    grid-column: 2;
+    font-size: 0.8rem;
+  }
+  & > button:first-of-type{
+    margin-left: 2em;
+  }
+  
+  &:hover,
+  &.checked {
     border-color: var(--accent-color);
     box-shadow: 0em 0em 5px -2px var(--accent-color);
-    
   }
+}
+
+.inbox-list-body > li > input[type="checkbox"] {
+  width: 1.5em;
+  height: 1.5em;
+  accent-color: var(--accent-color);
 }
 
 .inbox-empty-body {
@@ -159,15 +182,81 @@
   }
 }
 
-.title-checker-holder {
+dialog[open] {
+  color-scheme: light;
+  border: none;
+  justify-self: center;
+  align-self: center;
+  height: max-content;
+  padding: 1em;
+  border: none;
+  border-radius: 1em;
+  background-color: whitesmoke;
+  box-shadow: 0 0 10px -5px whitesmoke;
+  height: 500px;
+  width: 500px;
   display: flex;
+  flex-direction: column;
   gap: 1em;
-  align-items: center;
+  justify-content: space-between;
+  animation: 0.2s fadeIn ease-in-out forwards;
+}
+dialog[open] > fieldset {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  padding: 1em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5em;
+  gap: 1em;
 }
 
-input[type="checkbox"] {
-  width: 1.5em;
-  height: 1.5em;
-  accent-color: var(--accent-color);
+dialog[open] > .btn-container {
+  display: flex;
+  height: max-content;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5em;
+  > button {
+    border-radius: 0.5em;
+    > span {
+      display: none;
+    }
+  }
+  > button.save {
+    border: 1px solid var(--accent-color);
+  }
+  > button.cancel {
+    flex-direction: row-reverse;
+  }
+}
+
+dialog[open] > fieldset {
+  legend {
+    text-align: center;
+    font-weight: bold;
+    color: grey;
+  }
+  textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+    min-height: max-content;
+    box-sizing: border-box;
+    overflow-y: hidden;
+  }
+  .title,
+  textarea {
+    font-family: var(--default-font);
+    font-size: 1rem;
+    border: none;
+    background: none;
+  }
+  .title {
+    border-bottom: 1px solid grey;
+  }
+  .title:focus,
+  textarea:focus {
+    outline: none;
+  }
 }

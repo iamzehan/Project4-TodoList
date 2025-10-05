@@ -39,6 +39,19 @@ button.common {
     border: none;
     border-radius: 0.2em;
     transition: 0.3s background-color ease;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    
+    &.mono {
+      color: grey;
+      border: 1px solid grey;
+      background-color: transparent;
+    }
+
     > * {
       vertical-align: middle;
     }

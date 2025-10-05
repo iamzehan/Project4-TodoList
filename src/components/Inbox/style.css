@@ -6,6 +6,7 @@
   animation: 0.1s fadeIn ease-in-out forwards;
   -webkit-user-select: text;
   user-select: none;
+  
 }
 
 h3, h3:hover{
@@ -140,13 +141,9 @@ h3, h3:hover{
       font-size: 0.8rem;
     }
   }
-  > li:hover {
+  > li:hover, li.checked {
     border-color: var(--accent-color);
     box-shadow: 0em 0em 5px -2px var(--accent-color);
-  }
-  > li:active{
-    background-color: white;
-    color: black;
   }
 }
 

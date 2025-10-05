@@ -35,6 +35,16 @@ function List(task) {
   ).getButtonWithoutText();
   deleteBtn.addEventListener("click", () => alert("Delete clicked"));
   this.taskItem.appendChild(deleteBtn);
+
+  // Create read button
+  const readBtn = new Button(
+    ["icon-btn", "view"],
+    "description"
+  ).getButtonWithoutText();
+  
+  readBtn.addEventListener("click", () => alert("Read clicked"));
+  this.taskItem.appendChild(readBtn);
+
   // event listener for the item
   inputCheck.addEventListener("click", () => {
     this.taskItem.classList.toggle("checked");

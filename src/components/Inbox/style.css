@@ -62,6 +62,13 @@ h3:hover {
     grid-row: 1 / span3;
   }
 
+  &.view {
+    anchor-name: --view;
+    position: relative;
+    grid-column: 5;
+    grid-row: 1 / span3;
+  }
+
   /* Edit tooltip */
   &.edit:hover::after {
     position-area: bottom right;
@@ -73,6 +80,13 @@ h3:hover {
     position-anchor: --delete;
     position-area: bottom right;
     content: "Delete";
+  }
+
+  /* View tooltip */
+  &.view:hover::after {
+    position-anchor: --view;
+    position-area: bottom right;
+    content: "Details";
   }
 }
 

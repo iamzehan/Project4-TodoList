@@ -6,7 +6,7 @@ import template from "./empty.html";
 import data from "./Data.json";
 
 //components
-import Wrapper from "./sub-components/createListCards.js";
+import Wrapper from "../sub-components/createListCards.js";
 
 //main body wrapper
 const inbox = document.createElement("div");

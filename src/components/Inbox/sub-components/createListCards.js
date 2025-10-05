@@ -7,7 +7,7 @@ function List(task, index) {
   //task checker input
   const inputCheck = document.createElement("input");
   inputCheck.type = "checkbox";
-  inputCheck.id = index;
+  inputCheck.id = task.id;
   this.taskItem.appendChild(inputCheck);
 
   //task title
@@ -23,8 +23,9 @@ function List(task, index) {
   // edit and delete button
   let buttons = ["edit", "delete"];
   buttons.forEach((button) => {
-    const btn = new Button(["icon-btn", button], button);
-    this.taskItem.appendChild(btn.getButtonWithoutText());
+    const btn = new Button(["icon-btn", button], button).getButtonWithoutText();
+    btn.id = task.id;
+    this.taskItem.appendChild(btn);
   });
   // event listener for the item
   inputCheck.addEventListener("click", () => {

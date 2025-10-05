@@ -1,18 +1,16 @@
+//styles
 import "./style.css";
+
+//peripherals
 import template from "./empty.html";
 import data from "./Data.json";
-import Button from "./sub-components/createButton.js";
+
 //components
-import { Dialog } from "./sub-components/Dialog.js";
 import Wrapper from "./sub-components/createListCards.js";
 
-//wrapper
+//main body wrapper
 const inbox = document.createElement("div");
 inbox.classList.add("inbox");
-
-// append the dialog to the wrapper
-const dialog = new Dialog();
-inbox.appendChild(dialog.getDialog());
 
 //page title
 const pageTitle = document.createElement("h1");
@@ -30,11 +28,8 @@ if (noData) {
   inboxEmptyBody.innerHTML += template;
 } else {
   // append the List Body Wrapper
-  const wrapper = new Wrapper(data);
+  const wrapper = new Wrapper(inbox,data);
   inbox.appendChild(wrapper.inboxListBodyWrapper);
-  wrapper.button.addEventListener("click", () => {
-    dialog.open();
-  });
 }
 
 export default inbox;

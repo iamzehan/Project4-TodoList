@@ -1,13 +1,14 @@
 import Button from "./createButton";
+import { AddTask, UpdateTask, DialogReadOnly } from "./Dialog";
 
 // List item constructor
-function List(task, index) {
+function List(task) {
   //task list
   this.taskItem = document.createElement("li");
   //task checker input
   const inputCheck = document.createElement("input");
   inputCheck.type = "checkbox";
-  inputCheck.id = index;
+  inputCheck.id = task.id;
   this.taskItem.appendChild(inputCheck);
 
   //task title
@@ -20,19 +21,35 @@ function List(task, index) {
   due.textContent = task.due;
   this.taskItem.appendChild(due);
 
-  // edit and delete button
-  let buttons = ["edit", "delete"];
-  buttons.forEach((button) => {
-    const btn = new Button(["icon-btn", button], button);
-    this.taskItem.appendChild(btn.getButtonWithoutText());
-  });
+  // Create Edit button
+  this.editBtn = new Button(
+    ["icon-btn", "edit"],
+    "edit"
+  ).getButtonWithoutText();
+  this.taskItem.appendChild(this.editBtn);
+
+  // Create Delete button
+  const deleteBtn = new Button(
+    ["icon-btn", "delete"],
+    "delete"
+  ).getButtonWithoutText();
+  deleteBtn.addEventListener("click", () => alert("Delete clicked"));
+  this.taskItem.appendChild(deleteBtn);
+
+  // Create read button
+  this.readBtn = new Button(
+    ["icon-btn", "view"],
+    "description"
+  ).getButtonWithoutText();
+  this.taskItem.appendChild(this.readBtn);
+
   // event listener for the item
   inputCheck.addEventListener("click", () => {
     this.taskItem.classList.toggle("checked");
   });
 }
 
-function Wrapper(data) {
+function Wrapper(inbox, data) {
   //inbox body wrapper
   this.inboxListBodyWrapper = document.createElement("div");
   this.inboxListBodyWrapper.classList.add("inbox-list-body-wrapper");
@@ -41,9 +58,22 @@ function Wrapper(data) {
   const inboxListBody = document.createElement("ul");
   inboxListBody.classList.add("inbox-list-body");
 
-  data.tasks.forEach((task, index) => {
-    const taskItem = new List(task, index).taskItem;
-    inboxListBody.appendChild(taskItem);
+  //going through the data and keeping tabs on update functionality
+  data.tasks.forEach((task) => {
+    const list = new List(task);
+
+    // edit button event
+    list.editBtn.addEventListener("click", () => {
+      const updater = new UpdateTask(inbox, task);
+      updater.open();
+    });
+
+    // read button event
+    list.readBtn.addEventListener("click", ()=> {
+      const viewer = new DialogReadOnly(inbox, task, task.title);
+      viewer.open();
+    })
+    inboxListBody.appendChild(list.taskItem);
   });
 
   this.inboxListBodyWrapper.appendChild(inboxListBody);
@@ -54,6 +84,14 @@ function Wrapper(data) {
     "add_circle",
     "Add Task"
   ).getButtonWithText();
+
+  // add event listener
+  this.button.addEventListener("click", () => {
+    // append the dialog to the wrapper
+    const dialog = new AddTask(inbox);
+    dialog.open();
+  });
+  // append the button to wrapper
   this.inboxListBodyWrapper.appendChild(this.button);
 }
 

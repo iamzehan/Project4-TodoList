@@ -74,6 +74,7 @@ class DialogReadOnly extends Dialog {
     // event listener for edit
     this.update.addEventListener("click", () => {
       const update = new UpdateTask(inbox, data);
+      update.cancel.lastElementChild.textContent = "Back";
       update.open();
     });
   }

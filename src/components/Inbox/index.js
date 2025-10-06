@@ -8,28 +8,48 @@ import data from "./Data.json";
 //components
 import Wrapper from "../sub-components/createListCards.js";
 
-//main body wrapper
-const inbox = document.createElement("div");
-inbox.classList.add("inbox");
+class Common {
+  constructor(content) {
 
-//page title
-const pageTitle = document.createElement("h1");
-pageTitle.classList.add("page-title");
-pageTitle.textContent = "Inbox";
-inbox.appendChild(pageTitle);
+    //main body wrapper
+    this.inbox = document.createElement("div");
+    this.inbox.classList.add("inbox");
 
-//check if we have tasks
-const noData = data.tasks.length == 0;
+    //page title
+    this.pageTitle = document.createElement("h1");
+    this.pageTitle.classList.add("page-title");
+    this.pageTitle.textContent = "Inbox";
+    this.inbox.appendChild(this.pageTitle);
 
-if (noData) {
-  const inboxEmptyBody = document.createElement("div");
-  inboxEmptyBody.classList.add("inbox-empty-body");
-  inbox.appendChild(inboxEmptyBody);
-  inboxEmptyBody.innerHTML += template;
-} else {
-  // append the List Body Wrapper
-  const wrapper = new Wrapper(inbox,data);
-  inbox.appendChild(wrapper.inboxListBodyWrapper);
+    // content
+    this.content = content;
+    this.content.appendChild(this.inbox);
+  }
 }
 
-export default inbox;
+class EmptyBody extends Common {
+  constructor(content) {
+    super(content);
+    this.inboxEmptyBody = document.createElement("div");
+    this.inboxEmptyBody.classList.add("inbox-empty-body");
+    this.inboxEmptyBody.innerHTML += template;
+    this.inbox.appendChild(this.inboxEmptyBody);
+  }
+}
+
+class Populate extends Common {
+  constructor(content) {
+    super(content);
+    // append the List Body Wrapper
+    this.wrapper = new Wrapper(this.inbox, data);
+    this.inbox.appendChild(this.wrapper.inboxListBodyWrapper);
+  }
+}
+
+function Inbox(content) {
+  const hasTasks = data?.tasks?.length > 0;
+  const Page = hasTasks ? Populate : EmptyBody;
+  return new Page(content);
+}
+
+export default Inbox;

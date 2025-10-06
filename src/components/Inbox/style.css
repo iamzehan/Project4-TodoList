@@ -101,7 +101,9 @@
   color: white;
   font-size: 1rem;
   width: 8rem;
-  transition: 0.3s color ease-in-out, 0.3s font-weight ease-in-out;
+  transition: 0.3s color ease-in-out, 
+  0.3s font-weight ease-in-out,
+  0.5s box-shadow ease-in-out;
   & > .icon {
     font-family: var(--iconfont-filled);
     margin-right: 0.5em;
@@ -113,7 +115,7 @@
 
   &:hover {
     color: var(--accent-color);
-    border: 1px solid white;
+    box-shadow: 0 0 15px -5px var(--accent-color);
   }
 }
 

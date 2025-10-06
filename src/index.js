@@ -1,5 +1,6 @@
 import "./style.css";
 import Inbox from './components/Inbox/index.js';
+import Add from "./components/AddTask/index.js";
 
 function setActiveState(lastTarget, button){
    if (
@@ -15,13 +16,17 @@ function setActiveState(lastTarget, button){
 function loadPage(target, pageContent){
   pageContent.innerHTML = "";
   let pageName = target.lastElementChild.textContent;
+  const isActive =  target.classList.contains("active");
   if(pageName
-    == 'Inbox' && target.classList.contains("active")
+    == 'Inbox' && isActive
   ){
     Inbox(pageContent);
   }
+  if (pageName == 'Add task' && isActive){
+    Add(pageContent);
+  }
   if (pageName.includes("notifications")){
-    if (target.classList.contains("active")){
+    if (isActive){
       target.lastElementChild.textContent = "notifications";
     }
     pageContent.innerHTML = "<h1>Notifications</h1>"

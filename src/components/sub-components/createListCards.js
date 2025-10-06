@@ -54,8 +54,8 @@ function List(inbox, data, task) {
       this.taskItem.remove();
 
       // Refresh the list if Wrapper instance is available
-      if (this.inbox.wrapperInstance) {
-        this.inbox.wrapperInstance.refresh();
+      if (this.inbox.Wrapper) {
+        this.inbox.Wrapper.refresh();
       }
     }, 300);
   });

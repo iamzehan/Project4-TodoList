@@ -41,14 +41,7 @@ class Controller {
       Inbox(this.pageContent);
     }
     if (pageName == "Add task" && isActive) {
-      const task = Add(this.pageContent);
-      task.cancel.addEventListener("click", () => {
-        Inbox(this.pageContent);
-      });
-      task.save.addEventListener("click", ()=> {
-        Inbox(this.pageContent);
-        task.close();
-      })
+      Add(this.pageContent);
     }
     if (pageName.includes("notifications")) {
       if (isActive) {

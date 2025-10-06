@@ -18,7 +18,7 @@ function loadPage(target, pageContent){
   if(pageName
     == 'Inbox' && target.classList.contains("active")
   ){
-    pageContent.appendChild(Inbox);
+    Inbox(pageContent);
   }
   if (pageName.includes("notifications")){
     if (target.classList.contains("active")){

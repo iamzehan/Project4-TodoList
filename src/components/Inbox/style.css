@@ -8,13 +8,6 @@
   user-select: none;
 }
 
-h3,
-h3:hover {
-  cursor: text;
-  -webkit-user-select: text;
-  user-select: text;
-}
-
 .icon-btn {
   font-family: var(--icofont);
   font-size: inherit;
@@ -165,7 +158,18 @@ h3:hover {
   & > h3 {
     grid-column: 2;
     width: auto;
+    transition: 0.5s color ease-in-out;
   }
+
+  & > h3:hover {
+  cursor: pointer;
+  -webkit-user-select: text;
+  user-select: text;
+
+  color: var(--accent-color);
+  text-decoration: underline;
+  }
+
   & > p {
     grid-column: 2;
     font-size: 0.8rem;

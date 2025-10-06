@@ -3,18 +3,21 @@ import Inbox from "./components/Inbox/index.js";
 import Add from "./components/AddTask/index.js";
 
 class Controller {
-  constructor(lastTarget = null, button, pageContent) {
+  constructor(lastTarget = null, button, pageContent, fallBack) {
     // keeping the buttons
     this.lastTarget = lastTarget ? lastTarget : button;
     this.button = button;
+    this.fallBack = fallBack;
 
     // get the button property that holds it's name
     this.lastTargetText = this.lastTarget.lastElementChild.textContent;
     this.buttonText = this.button.lastElementChild.textContent;
+    this.fallBackText = this.fallBack.lastElementChild.textContent;
 
     // get the button classes
     this.lastTargetClass = this.lastTarget.classList;
     this.buttonClass = this.button.classList;
+    this.fallBackClass = this.button.classList;
 
     // finally the content element
     this.pageContent = pageContent;
@@ -38,7 +41,14 @@ class Controller {
       Inbox(this.pageContent);
     }
     if (pageName == "Add task" && isActive) {
-      Add(this.pageContent);
+      const task = Add(this.pageContent);
+      task.cancel.addEventListener("click", () => {
+        Inbox(this.pageContent);
+      });
+      task.save.addEventListener("click", ()=> {
+        Inbox(this.pageContent);
+        task.close();
+      })
     }
     if (pageName.includes("notifications")) {
       if (isActive) {
@@ -50,9 +60,16 @@ class Controller {
 }
 
 const navButtons = document.querySelectorAll("button");
-let lastTarget = document.querySelector("button.active");
+const fallBack = document.querySelector("button.active");
+let lastTarget = fallBack;
+
 const pageContent = document.querySelector(".content");
-const defaultController = new Controller(null, lastTarget, pageContent);
+const defaultController = new Controller(
+  null,
+  lastTarget,
+  pageContent,
+  fallBack
+);
 
 document.addEventListener("DOMContentLoaded", () => {
   lastTarget = defaultController.setActiveState();
@@ -61,7 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 navButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const controller = new Controller(lastTarget, button, pageContent);
+    const controller = new Controller(
+      lastTarget,
+      button,
+      pageContent,
+      fallBack
+    );
     lastTarget = controller.setActiveState();
     controller.loadPage();
   });

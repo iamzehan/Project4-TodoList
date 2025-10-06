@@ -1,51 +1,84 @@
 import "./style.css";
-import Inbox from './components/Inbox/index.js';
+import Inbox from "./components/Inbox/index.js";
 import Add from "./components/AddTask/index.js";
 
-function setActiveState(lastTarget, button){
-   if (
-      button.lastElementChild.textContent !=
-      lastTarget.lastElementChild.textContent
-    ) {
-      button.classList.add("active");
-      lastTarget.classList.remove("active");
-    }
-    return button;
-}
+class Controller {
+  constructor(lastTarget = null, button, pageContent, fallBack) {
+    // keeping the buttons
+    this.lastTarget = lastTarget ? lastTarget : button;
+    this.button = button;
+    this.fallBack = fallBack;
 
-function loadPage(target, pageContent){
-  pageContent.innerHTML = "";
-  let pageName = target.lastElementChild.textContent;
-  const isActive =  target.classList.contains("active");
-  if(pageName
-    == 'Inbox' && isActive
-  ){
-    Inbox(pageContent);
+    // get the button property that holds it's name
+    this.lastTargetText = this.lastTarget.lastElementChild.textContent;
+    this.buttonText = this.button.lastElementChild.textContent;
+    this.fallBackText = this.fallBack.lastElementChild.textContent;
+
+    // get the button classes
+    this.lastTargetClass = this.lastTarget.classList;
+    this.buttonClass = this.button.classList;
+    this.fallBackClass = this.button.classList;
+
+    // finally the content element
+    this.pageContent = pageContent;
   }
-  if (pageName == 'Add task' && isActive){
-    Add(pageContent);
-  }
-  if (pageName.includes("notifications")){
-    if (isActive){
-      target.lastElementChild.textContent = "notifications";
+
+  setActiveState() {
+    const isDifferent = this.buttonText != this.lastTargetText;
+    if (isDifferent) {
+      this.buttonClass.add("active");
+      this.lastTargetClass.remove("active");
     }
-    pageContent.innerHTML = "<h1>Notifications</h1>"
+    return this.button;
+  }
+
+  loadPage() {
+    this.pageContent.innerHTML = "";
+    let pageName = this.buttonText;
+    const isActive = this.buttonClass.contains("active");
+
+    if (pageName == "Inbox" && isActive) {
+      Inbox(this.pageContent);
+    }
+    if (pageName == "Add task" && isActive) {
+      Add(this.pageContent);
+    }
+    if (pageName.includes("notifications")) {
+      if (isActive) {
+        this.button.lastElementChild.textContent = "notifications";
+      }
+      this.pageContent.innerHTML = "<h1>Notifications</h1>";
+    }
   }
 }
 
 const navButtons = document.querySelectorAll("button");
-let lastTarget = document.querySelector("button.active");
-const pageContent = document.querySelector(".content");
+const fallBack = document.querySelector("button.active");
+let lastTarget = fallBack;
 
-document.addEventListener("DOMContentLoaded", ()=> {
-  setActiveState(lastTarget, lastTarget);
-  loadPage(lastTarget, pageContent);
-})
+const pageContent = document.querySelector(".content");
+const defaultController = new Controller(
+  null,
+  lastTarget,
+  pageContent,
+  fallBack
+);
+
+document.addEventListener("DOMContentLoaded", () => {
+  lastTarget = defaultController.setActiveState();
+  defaultController.loadPage();
+});
 
 navButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    lastTarget = setActiveState(lastTarget, button);
-    loadPage(lastTarget, pageContent);
+    const controller = new Controller(
+      lastTarget,
+      button,
+      pageContent,
+      fallBack
+    );
+    lastTarget = controller.setActiveState();
+    controller.loadPage();
   });
 });
 
@@ -53,12 +86,11 @@ const dockButton = document.querySelector("span.dock");
 const navBar = document.querySelector("nav");
 dockButton.addEventListener("click", () => {
   navBar.classList.toggle("hide");
-  
-  if(navBar.classList.contains("hide")){
+
+  if (navBar.classList.contains("hide")) {
     dockButton.textContent = "dock_to_right";
-  }
-  else {
+  } else {
     dockButton.textContent = "dock_to_left";
   }
   pageContent.classList.toggle("expand");
-})
+});

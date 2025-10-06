@@ -64,14 +64,14 @@ function Wrapper(inbox, data) {
 
     // edit button event
     list.editBtn.addEventListener("click", () => {
-      const updater = new UpdateTask(inbox, task);
+      const updater = new UpdateTask(inbox, data, task);
       updater.open();
     });
 
     // read button event and title event
     [list.readBtn, list.title].forEach((item) => {
       item.addEventListener("click", () => {
-        const viewer = new DialogReadOnly(inbox, task, task.title);
+        const viewer = new DialogReadOnly(inbox, data, task);
         viewer.open();
       });
     });

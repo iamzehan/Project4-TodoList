@@ -237,7 +237,7 @@ div.content {
   transition: 0.3s width ease;
 }
 
-nav.hide {
+header, nav.hide {
   animation: 0.4s slideLeft ease-out forwards;
   > .navigation, .projects, .footer{
     margin-right: 40px;
@@ -247,7 +247,7 @@ nav.hide {
   transition : 0.5s background-color ease;
 }
 
-nav, div.content{
+header, nav, div.content{
   transition: 0.5s width ease-in-out;
   animation: 0.4s slideRight ease-in forwards;
 }

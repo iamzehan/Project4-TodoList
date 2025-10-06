@@ -8,13 +8,6 @@
   user-select: none;
 }
 
-h3,
-h3:hover {
-  cursor: text;
-  -webkit-user-select: text;
-  user-select: text;
-}
-
 .icon-btn {
   font-family: var(--icofont);
   font-size: inherit;
@@ -49,7 +42,7 @@ h3:hover {
   }
 
   &.edit {
-    position-anchor: --edit;
+    anchor-name: --edit;
     position: relative;
     grid-column: 3;
     grid-row: 1 / span3;
@@ -71,6 +64,7 @@ h3:hover {
 
   /* Edit tooltip */
   &.edit:hover::after {
+    position-anchor: --edit;
     position-area: bottom right;
     content: "Edit";
   }
@@ -107,7 +101,9 @@ h3:hover {
   color: white;
   font-size: 1rem;
   width: 8rem;
-  transition: 0.3s color ease-in-out, 0.3s font-weight ease-in-out;
+  transition: 0.3s color ease-in-out, 
+  0.3s font-weight ease-in-out,
+  0.5s box-shadow ease-in-out;
   & > .icon {
     font-family: var(--iconfont-filled);
     margin-right: 0.5em;
@@ -119,7 +115,7 @@ h3:hover {
 
   &:hover {
     color: var(--accent-color);
-    border: 1px solid white;
+    box-shadow: 0 0 15px -5px var(--accent-color);
   }
 }
 
@@ -165,7 +161,41 @@ h3:hover {
   & > h3 {
     grid-column: 2;
     width: auto;
+    position: relative;
+    transition: 0.5s color ease-in-out;
+    anchor-name: --title;
   }
+
+  & > h3::after{
+    position: absolute;
+    font-family: var(--default-font);
+    background-color: black;
+    border: 1px solid;
+    font-size: 0.5rem;
+    width: max-content;
+    padding: 0 0.4em;
+    border-radius: 0.5em;
+    top: 0;
+    transform: translateY(-120%);
+  }
+
+  & > h3:hover {
+  cursor: pointer;
+  -webkit-user-select: text;
+  user-select: text;
+
+  color: var(--accent-color);
+  text-decoration: underline;
+  }
+
+  & > h3:hover::after{
+    position-anchor: --title;
+    position-area: bottom;
+    content: 'View details';
+    color: white;
+    text-decoration: none;
+  }
+
   & > p {
     grid-column: 2;
     font-size: 0.8rem;

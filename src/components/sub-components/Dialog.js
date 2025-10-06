@@ -3,7 +3,10 @@ import Button from "./createButton";
 // Here you basically do everything with a dialog
 
 class Dialog {
-  constructor(legend) {
+  constructor(legend, data) {
+
+    // main data 
+    this.data = data;
     this.dialog = document.createElement("dialog");
     this.fieldset = document.createElement("fieldset");
 
@@ -55,13 +58,16 @@ class Dialog {
 
 // Dialog Read View
 class DialogReadOnly extends Dialog {
-  constructor(inbox, data) {
-    super(data.title);
+  constructor(inbox, data, task) {
+    super(task.title, data);
+    this.task = task;
     this.data = data;
+    this.task = task;
+
     // the legend should contain the title of the task;
     this.fieldset.appendChild(this.legend);
     this.description = document.createElement("p");
-    this.description.textContent = this.data.description;
+    this.description.textContent = this.task.description;
     this.fieldset.appendChild(this.description);
     this.dialog.appendChild(this.fieldset);
     this.update.lastElementChild.textContent="Edit";
@@ -73,7 +79,7 @@ class DialogReadOnly extends Dialog {
 
     // event listener for edit
     this.update.addEventListener("click", () => {
-      const update = new UpdateTask(inbox, data);
+      const update = new UpdateTask(inbox, this.data, this.task);
       update.cancel.lastElementChild.textContent = "Back";
       update.open();
     });
@@ -94,6 +100,7 @@ class DialogWrite extends Dialog {
   }
 }
 
+// AddTasks 
 class AddTask extends DialogWrite {
   constructor(inbox, legend = "Add New Task") {
     super(legend);
@@ -102,14 +109,19 @@ class AddTask extends DialogWrite {
   }
 }
 
+// UpdateTasks
 class UpdateTask extends DialogWrite {
-  constructor(inbox, data, legend = "Update Task") {
-    super(legend);
+  constructor(inbox, data, task, legend = "Update Task") {
+    super(legend, data);
     this.data = data;
-    this.input.value = this.data.title;
-    this.textarea.textContent = this.data.description;
+    this.task = task;
+    this.input.value = this.task.title;
+    this.textarea.textContent = this.task.description;
     this.buttonContainer.appendChild(this.update);
     inbox.appendChild(this.dialog);
+    this.update.addEventListener("click", ()=> {
+      this.close();
+    });
   }
 }
 

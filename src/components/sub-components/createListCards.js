@@ -12,9 +12,9 @@ function List(task) {
   this.taskItem.appendChild(inputCheck);
 
   //task title
-  const title = document.createElement("h3");
-  title.textContent = task.title;
-  this.taskItem.appendChild(title);
+  this.title = document.createElement("h3");
+  this.title.textContent = task.title;
+  this.taskItem.appendChild(this.title);
 
   // task due
   const due = document.createElement("p");
@@ -68,11 +68,13 @@ function Wrapper(inbox, data) {
       updater.open();
     });
 
-    // read button event
-    list.readBtn.addEventListener("click", ()=> {
-      const viewer = new DialogReadOnly(inbox, task, task.title);
-      viewer.open();
-    })
+    // read button event and title event
+    [list.readBtn, list.title].forEach((item) => {
+      item.addEventListener("click", () => {
+        const viewer = new DialogReadOnly(inbox, task, task.title);
+        viewer.open();
+      });
+    });
     inboxListBody.appendChild(list.taskItem);
   });
 

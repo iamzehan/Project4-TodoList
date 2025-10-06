@@ -141,7 +141,7 @@
   padding: 1em;
   gap: 0 1em;
   border-radius: 0.5em;
-  border: 1px solid grey;
+  border: 1px solid rgba(128, 128, 128, 0.5);
   cursor: default;
   background-color: transparent;
   transition: 0.5s border-color ease-in-out, 
@@ -199,11 +199,20 @@
   & > p {
     grid-column: 2;
     font-size: 0.8rem;
+  }
+  & > button {
+    display: hidden;
+    opacity: 0;
+    transition: 0.3s opacity ease-in-out;
   }  
   &:hover,
   &.checked {
     border-color: var(--accent-color);
     box-shadow: 0em 0em 5px -2px var(--accent-color);
+  }
+  &:hover button{
+    visibility:visible;
+    opacity: 1;
   }
 }
 

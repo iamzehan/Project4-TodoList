@@ -38,7 +38,7 @@ class Controller {
     const isActive = this.buttonClass.contains("active");
 
     if (pageName == "Inbox" && isActive) {
-      Inbox(this.pageContent);
+      new Inbox(this.pageContent).load();
     }
     if (pageName == "Add task" && isActive) {
       Add(this.pageContent);

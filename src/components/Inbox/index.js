@@ -10,7 +10,6 @@ import Wrapper from "../sub-components/createListCards.js";
 
 class Common {
   constructor(content) {
-
     //main body wrapper
     this.inbox = document.createElement("div");
     this.inbox.classList.add("inbox");
@@ -23,6 +22,8 @@ class Common {
 
     // content
     this.content = content;
+  }
+  load() {
     this.content.appendChild(this.inbox);
   }
 }
@@ -46,10 +47,16 @@ class Populate extends Common {
   }
 }
 
-function Inbox(content) {
-  const hasTasks = data?.tasks?.length > 0;
-  const Page = hasTasks ? Populate : EmptyBody;
-  return new Page(content);
+class Inbox {
+  constructor(content) {
+    this.content = content;
+  }
+
+  load() {
+    const hasTasks = data?.tasks?.length > 0;
+    const Page = hasTasks ? Populate : EmptyBody;
+    return new Page(this.content).load();
+  }
 }
 
 export default Inbox;
